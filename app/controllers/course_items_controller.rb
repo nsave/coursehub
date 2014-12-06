@@ -1,4 +1,5 @@
 class CourseItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_course_item, only: [:edit, :update, :destroy]
 
   def new
