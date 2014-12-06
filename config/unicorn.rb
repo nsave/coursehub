@@ -7,7 +7,7 @@ stdout_path "#{root}/log/unicorn.stdout.log"
 
 timeout 30
 worker_processes 2
-listen 3000
+listen '127.0.0.1:3000'
 
 preload_app true
 
