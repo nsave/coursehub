@@ -11,7 +11,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'unicorn'
 
 gem 'slim-rails'
-gem 'marionette-rails'
+gem 'backbone-on-rails'
 gem 'mongoid'
 gem 'devise'
 gem 'bson_ext'
