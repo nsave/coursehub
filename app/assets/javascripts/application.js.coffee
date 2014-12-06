@@ -2,4 +2,11 @@
 #= require jquery_ujs
 #= require_tree .
 
-#= require backbone.marionette
+#= require underscore
+#= require backbone
+#= require coursehub
+#= require_tree ../templates
+#= require_tree ./models
+#= require_tree ./collections
+#= require_tree ./views
+#= require_tree ./routers
