@@ -1,0 +1,15 @@
+- if @courses.empty?
+  .alert.alert-warning Sorry. There are no available courses.
+- else
+  table.table
+    thead
+      tr
+        td Name
+        td Description
+    tbody
+      - for course in @courses
+        tr
+          td = link_to course.name, course_path(course)
+          td = course.description.try(:truncate, 150)
+
+= link_to 'Create new course', new_course_path, class: 'btn btn-success'

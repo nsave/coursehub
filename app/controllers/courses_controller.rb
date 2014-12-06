@@ -1,6 +1,11 @@
 class CoursesController < ApplicationController
+  before_action :find_course, only: [:show, :edit, :update, :destroy]
+
   def index
     @courses = Course.all
+  end
+
+  def show
   end
 
   def new
@@ -8,26 +13,35 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.create(course_params)
+    @course = Course.new(course_params)
+    if @course.save
+      flash[:notice] = 'New course was successfully created'
+      redirect_to courses_path
+    else
+      render :new
+    end
   end
 
   def edit
-    @course = Course.find(params[:id])
   end
 
   def update
-    Course.find(params[:id]).update(course_params)
+    @course.update(course_params)
     redirect_to course_path(params[:id])
   end
 
-  def delete
-    Course.find(params[:id]).delete
+  def destroy
+    @course.delete
     redirect_to courses_path
   end
 
   protected
 
   def course_params
-    params[:course].permit(:name, :description, :user_id, :parent_id)
+    params.require(:course).permit(:name, :description, :duration)
+  end
+
+  def find_course
+    @course = Course.find(params[:id])
   end
 end

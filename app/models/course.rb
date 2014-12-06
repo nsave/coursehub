@@ -6,6 +6,10 @@ class Course
   field :duration, type: Float
   field :parent_id, default: nil
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :duration, presence: true, numericality: {greater_than: 0}
+
   belongs_to :user
   has_many :course_items, dependent: :destroy
 

@@ -1,0 +1,11 @@
+= form_for @course, html: {role: 'form'} do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control', rows: 5
+  .form-group
+    = f.label :duration
+    = f.text_field :duration, class: 'form-control'
+  = f.submit nil, class: 'btn btn-success'
