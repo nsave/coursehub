@@ -12,3 +12,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'unicorn'
 
 gem 'slim-rails'
+gem 'marionette-rails'
