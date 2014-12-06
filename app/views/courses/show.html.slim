@@ -1,3 +1,28 @@
 h2 = @course.name
 .panel = @course.description
 p Duration: #{@course.duration}
+
+h2 This course consists of these items:
+- if @course.course_items.empty?
+  .alert.alert-warning Whoops. There are no items in this course.
+- else
+  table.table
+    thead
+      tr
+        td Name
+        td Description
+        td Link
+        td Type
+        td
+        td
+    tbody
+      - for item in @course.course_items
+        tr
+          td = item.name
+          td = item.description
+          td = link_to 'link', item.url
+          td = item.type
+          td = link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
+          td = link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
+
+= link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-success'

@@ -1,7 +1,6 @@
 .jumbotron
   .container
     h1 Welcome to CourseHub!
-    p Best online courses for people by people
-    p For free! Forever!
+    p Best online courses for people by people.
     p
-      a.btn.btn-success.btn-lg href='#' role='button' Get started now &raquo;
+      = link_to 'Get started now!', courses_path, class: 'btn btn-success btn-lg', role: 'button'

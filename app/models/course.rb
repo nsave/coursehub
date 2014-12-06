@@ -11,7 +11,7 @@ class Course
   validates :duration, presence: true, numericality: {greater_than: 0}
 
   belongs_to :user
-  has_many :course_items, dependent: :destroy
+  has_many :course_items
 
   def fork(user_id)
     Course.create(user_id: user_id, duration: duration, parent_id: id,

@@ -1,38 +1,43 @@
 class CourseItemsController < ApplicationController
-  def index
-    @items = course.course_items
-  end
+  before_action :find_course_item, only: [:edit, :update, :destroy]
 
   def new
-    @item = CourseItem.new
-  end
-
-  def create
-    CourseItem.create(course_item_params)
-    redirect_to course_path(params[:course_id])
+    @item = CourseItem.new(course_id: params[:course_id])
   end
 
   def edit
-    @item = CourseItem.find(params[:id])
+  end
+
+  def create
+    @item = CourseItem.new(course_item_params)
+    if @item.save
+      flash[:notice] = 'New item was successfully created'
+      redirect_to course_path(@item.course)
+    else
+      render :new
+    end
   end
 
   def update
-    CourseItem.find(params[:id]).update(course_item_params)
-    redirect_to course_item_course_path(params[:course_id], params[:id])
+    @item.update(course_item_params)
+    flash[:notice] = 'Item was successfully updated'
+    redirect_to course_path(@item.course)
   end
 
-  def delete
-    CourseItem.find(params[:id]).delete
+  def destroy
+    @item.delete
+    flash[:notice] = 'Item was successfully deleted'
     redirect_to course_path(params[:course_id])
   end
 
   protected
 
-  def course
-    Course.find(params[:course_id])
+  def find_course_item
+    @item = CourseItem.includes(:course).find(params[:id])
   end
 
   def course_item_params
-    params[:course_item].permit(:name, :description, :user_id, :url, :type)
+    params.permit(:course_id).
+      merge(params.require(:course_item).permit(:name, :description, :url, :type))
   end
 end
