@@ -6,19 +6,19 @@ nav.navbar.navbar-inverse role='navigation'
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href="#{root_path}" Coursehub
+      a.navbar-brand href="#{root_path}" CourseHub
 
     #navbar.navbar-collapse.collapse
 
       - if user_signed_in?
         div.navbar-right
-          = link_to('Logout', destroy_user_session_path, method: 'delete')
+          = link_to('Logout', destroy_user_session_path, method: 'delete', class: 'btn btn-success')
       - else
         = form_for(:user, as: :user, :url => session_path(:user), html: { class: 'navbar-form navbar-right'}, role: 'form') do |f|
-            .form-group
-              input.form-control type='text' placeholder='Email' name='user[email]'
-            | &nbsp
-            .form-group
-              input.form-control type='password' placeholder='Password' name='user[password]'
-            | &nbsp
-            button.btn.btn-success type="submit" Sign in
+          .form-group
+            input.form-control type='text' placeholder='Email' name='user[email]'
+          | &nbsp
+          .form-group
+            input.form-control type='password' placeholder='Password' name='user[password]'
+          | &nbsp
+          button.btn.btn-success type="submit" Sign in
