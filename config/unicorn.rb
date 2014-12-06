@@ -5,9 +5,9 @@ pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.stderr.log"
 stdout_path "#{root}/log/unicorn.stdout.log"
 
-listen "/tmp/unicorn.coursehub.sock"
 timeout 30
 worker_processes 2
+listen '127.0.0.1:3000'
 
 preload_app true
 
