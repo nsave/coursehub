@@ -1,7 +1,6 @@
 class CourseItemsController < ApplicationController
   def index
-    items = course.course_items
-    render json: items.to_json
+    @items = course.course_items
   end
 
   def new
@@ -10,22 +9,21 @@ class CourseItemsController < ApplicationController
 
   def create
     CourseItem.create(course_item_params)
-    render json: 'ok'
+    redirect_to course_path(params[:course_id])
   end
 
   def edit
     @item = CourseItem.find(params[:id])
-    render json: @item.to_json
   end
 
   def update
     CourseItem.find(params[:id]).update(course_item_params)
-    render json: 'ok'
+    redirect_to course_item_course_path(params[:course_id], params[:id])
   end
 
   def delete
     CourseItem.find(params[:id]).delete
-    render json: 'ok'
+    redirect_to course_path(params[:course_id])
   end
 
   protected

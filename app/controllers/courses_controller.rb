@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
   def index
     @courses = Course.all
-    render json: @courses.to_json
   end
 
   def new
@@ -10,22 +9,20 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.create(course_params)
-    render json: 'ok'
   end
 
   def edit
     @course = Course.find(params[:id])
-    render json: @course.to_json
   end
 
   def update
     Course.find(params[:id]).update(course_params)
-    render json: 'ok'
+    redirect_to course_path(params[:id])
   end
 
   def delete
     Course.find(params[:id]).delete
-    render json: 'ok'
+    redirect_to courses_path
   end
 
   protected
