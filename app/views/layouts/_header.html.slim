@@ -12,7 +12,10 @@ nav.navbar.navbar-inverse role='navigation'
 
       - if user_signed_in?
         div.navbar-right
-          = link_to('Logout', destroy_user_session_path, method: 'delete', class: 'btn btn-success')
+          .navbar-text
+            = current_user.email
+            span &nbsp;
+            = link_to('logout', destroy_user_session_path, method: 'delete', class: 'btn btn-danger btn-xs')
       - else
         = form_for(:user, as: :user, :url => session_path(:user), html: { class: 'navbar-form navbar-right'}, role: 'form') do |f|
           .form-group

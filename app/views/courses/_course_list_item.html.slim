@@ -1,0 +1,16 @@
+.col-lg-4.col-md-4.col-sm-4.col-xs-6
+  .course_list_item
+    h3 = link_to course.name, course_path(course)
+    .stats.row
+      .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-time
+        span = " #{course.duration.to_i} hours"
+      .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-thumbs-up
+        span = " 4223"
+    .tags
+      span.glyphicon.glyphicon-tag
+      a.label.label-success href='#' Ruby
+      a.label.label-success href='#' Beginners
+      a.label.label-success href='#' Ruby
+    .desc = course.description

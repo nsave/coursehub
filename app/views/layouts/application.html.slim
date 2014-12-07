@@ -17,9 +17,7 @@ html lang='en'
 
 body
   = render 'layouts/header'
-  .container-fluid
-    .row
-      .col-xs-12
-        = render 'shared/flashes'
-        = yield
+  .container.application
+    = render 'shared/flashes'
+    = yield
   = render 'layouts/footer'

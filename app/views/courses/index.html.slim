@@ -1,15 +1,11 @@
-- if @courses.empty?
-  .alert.alert-warning Sorry. There are no available courses.
-- else
-  table.table
-    thead
-      tr
-        td Name
-        td Description
-    tbody
-      - for course in @courses
-        tr
-          td = link_to course.name, course_path(course)
-          td = course.description.try(:truncate, 150)
+.row
+  h1 Latest courses on CourseHub
+
+.row.course_list
+  - if @courses.empty?
+    .alert.alert-warning Sorry. There are no available courses.
+  - else
+    - for course in @courses
+      = render 'courses/course_list_item', {course: course}
 
 = link_to 'Create new course', new_course_path, class: 'btn btn-success'
