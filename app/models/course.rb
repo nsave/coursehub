@@ -25,8 +25,13 @@ class Course
     merged_already = parent.course_items.where(user_id: id).map(&:url)
     items = course_items.where(user_id: id)
       .reject { |x| merged_already.include? x[:url] }
-      .map(&:fork, parent_id)
+      .map { |x| x.fork parent_id }
       .map { |x| x.update(pull_request: pr) }
+  end
+
+  def merge_request(request_id)
+    items = PullRequest.find(request_id).course_items
+    items.update_all(pull_request_id: nil, course_id: id)
   end
 
   def progress
