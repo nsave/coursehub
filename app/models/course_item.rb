@@ -25,4 +25,12 @@ class CourseItem
   def learned?
     item_progress.learned
   end
+
+  def fork(course_id)
+    ci = CourseItem.create(name: name, description: description, url: url,
+                           type: type, course_id: course_id)
+    ItemProgress.create(learned: false, course_item_id: ci.id,
+                        course_id: course_id)
+    ci
+  end
 end
