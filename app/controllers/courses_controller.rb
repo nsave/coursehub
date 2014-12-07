@@ -59,6 +59,16 @@ class CoursesController < ApplicationController
     render :index
   end
 
+  def popular
+    @courses = (Course.all.sort_by { |x| x.likes.size }).reverse
+    render :index
+  end
+
+  def latest
+    @courses = Course.order_by(:created_at => 'desc')
+    render :index
+  end
+
   def enroll
     current_user.enroll(@course)
     flash[:notice] = "You've successfully enrolled in this course"

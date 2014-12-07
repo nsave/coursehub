@@ -1,0 +1,15 @@
+.row
+  h1 All tags
+hr
+.row
+  - if @tags.empty?
+    .alert.alert-warning Sorry. There are no tags yet.
+  - else
+    - for page in (1..3)
+      .col-md-2
+        .list-group
+          - @tags.paginate(page: page, per_page: 20).each do |tag|
+              a.list-group-item href='#{filter_courses_path(tag.name)}'
+                = tag.name
+                span.badge
+                  = tag.courses.count

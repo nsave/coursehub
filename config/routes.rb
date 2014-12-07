@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'courses#index'
+  get 'tags', to: 'application#tags'
   resources :courses do
     resources :course_items, path: 'items', except: [:index, :show] do
       member do
@@ -13,6 +14,8 @@ Rails.application.routes.draw do
       get 'own'
       get 'learning'
       get 'filter/:tag' , to: 'courses#filter', as: 'filter'
+      get 'popular'
+      get 'latest'
     end
     member do
       put 'enroll'

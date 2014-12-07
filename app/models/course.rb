@@ -1,11 +1,12 @@
 class Course
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :name, type: String
   field :description, type: String
   field :duration, type: Float
   field :parent_id, default: nil
-  field :likes, type: Array
+  field :likes, type: Array, default: []
 
   validates :name, presence: true
   validates :description, presence: true
