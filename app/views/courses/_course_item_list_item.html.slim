@@ -1,0 +1,12 @@
+.course_item_list_item.row
+  .course_item_list_item_checkbox.col-lg-1.col-md-1.col-sm-1.col-xs-1
+    a.glyphicon.glyphicon-unchecked
+    / span.glyphicon.glyphicon-check
+  .col-lg-11.col-md-11.col-sm-11.col-xs-11
+    .course_item_list_item.row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-8
+        div = course_item.name
+      .col-lg-4.col-md-4.col-sm-4.col-xs-4
+        span.glyphicon.glyphicon-book
+        | &nbsp;
+        = link_to course_item.url, course_item.url

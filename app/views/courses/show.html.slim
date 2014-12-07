@@ -1,29 +1,37 @@
-h2 = @course.name
-.panel = @course.description
-p Duration: #{@course.duration}
+- course_progress = (1/3.0)*100 # must be number of passed items divided to total items number
 
-h2 This course consists of these items:
-- if @course.course_items.empty?
-  .alert.alert-warning Whoops. There are no items in this course.
-- else
-  table.table
-    thead
-      tr
-        td Name
-        td Description
-        td Link
-        td Type
-        td
-        td
-    tbody
-      - for item in @course.course_items
-        tr
-          td = item.name
-          td = item.description
-          td = link_to 'link', item.url
-          td = item.type
-          - if(current_user && @course.user_id == current_user.id)
-            td = link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
-            td = link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
+.row
+  .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
+    h1 = @course.name
+    .course_tags
+      span.glyphicon.glyphicon-tag
+      a.label.label-success href='#' Ruby
+      a.label.label-success href='#' Beginners
+      a.label.label-success href='#' Ruby
+    h2
+      small = @course.description
+    hr
+    - if @course.course_items.empty?
+      .alert.alert-warning Whoops. There are no items in this course.
+    - else
+      - for course_item in @course.course_items
+        = render 'course_item_list_item', {course_item: course_item}
+        /- if(current_user && @course.user_id == current_user.id)
+          div =  link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
+          div =  link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
 
-= link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-success'
+    = link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-warning'
+
+  .user_progress.col-lg-3.col-md-3.col-sm-3.col-xs-3
+    .course_stats.row
+      .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-time
+        span = " #{@course.duration.to_i} hours"
+      .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-thumbs-up
+        span = " 4223"
+    .user_progress_stats.row
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+        h3 Your progress: 1/3
+        .progress
+          .progress-bar role='progressbar' style="width: #{course_progress}%"

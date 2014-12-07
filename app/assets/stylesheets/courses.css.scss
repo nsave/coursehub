@@ -1,13 +1,13 @@
-// Place all the styles related to the courses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 $separator-border: 1px solid #eee;
 
 $margin-xs: 3px;
 $margin-small: 7px;
 $margin-medium: 17px;
 $margin-big: 29px;
+
+.course_tags {
+  * {margin-right: $margin-xs;}
+}
 
 .course_list {
   border-bottom: $separator-border;
@@ -20,8 +20,23 @@ $margin-big: 29px;
     div {margin-top: $margin-small;}
     .desc {margin-top: $margin-medium}
 
-    .tags {
-      * {margin-right: $margin-xs;}
-    }
+  }
+}
+
+.course_content {
+  border-right: $separator-border;
+}
+
+.course_item_list_item {
+  font-size: 110%;
+  margin-bottom: $margin-medium;
+
+  .course_item_list_item_checkbox a {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    top: -2px;
   }
 }
