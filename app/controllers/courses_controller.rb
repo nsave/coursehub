@@ -47,7 +47,7 @@ class CoursesController < ApplicationController
   end
 
   def own
-    @title = 'My own courses'
+    @title = 'Your own courses'
     @courses = current_user.courses
     render :index
   end
@@ -57,11 +57,13 @@ class CoursesController < ApplicationController
   end
 
   def popular
+    @title = 'Most popular courses'
     @courses = (Course.all.sort_by { |x| x.likes.size }).reverse
     render :index
   end
 
   def latest
+    @title = 'Latest courses'
     @courses = Course.order_by(:created_at => 'desc')
     render :index
   end
@@ -84,7 +86,19 @@ class CoursesController < ApplicationController
 
   def filter
     tag = Tag.where(name: params[:tag]).first
+    @title = "Courses with tag #{tag.name}"
     @courses = tag && tag.courses || []
+    render :index
+  end
+
+  def search
+    @title = "Search for: #{params[:search]}"
+    keywords = params[:search].strip.downcase.split(/\s+/)
+    @courses = Course.all.select do |course| 
+      keywords.find do 
+        |keyword| course.name.downcase.include?(keyword) || course.description.include?(keyword)
+      end
+    end
     render :index
   end
 

@@ -34,6 +34,7 @@ nav.navbar.navbar-inverse role='navigation'
         form.navbar-form.navbar-left
           .form-group
             = link_to 'Create course', new_course_path, class: 'btn btn-success'
+
         div.navbar-right
           .navbar-text
             = current_user.email
@@ -50,3 +51,8 @@ nav.navbar.navbar-inverse role='navigation'
           button.btn.btn-success type="submit" Sign in
           | &nbsp;
           = link_to('Sign up', new_user_registration_path, class: 'navbar-right btn btn-warning')
+
+      = form_tag("/search", class: 'navbar-form navbar-right') do
+        .form-group
+          = text_field_tag('search', nil, class: 'form-control', placeholder: 'Search')
+        = submit_tag("Search", class: 'btn btn-primary')
