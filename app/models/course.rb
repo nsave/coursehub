@@ -5,7 +5,7 @@ class Course
   field :description, type: String
   field :duration, type: Float
   field :parent_id, default: nil
-  field :like, type: Array
+  field :likes, type: Array
 
   validates :name, presence: true
   validates :description, presence: true

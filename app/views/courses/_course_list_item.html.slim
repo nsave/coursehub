@@ -7,7 +7,8 @@
         span = " #{course.duration.to_i} hours"
       .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
         span.glyphicon.glyphicon-thumbs-up
-        span = " 4223"
+        | &nbsp;
+        span = course.likes.nil? ? 0 : course.likes.size
     - unless course.tags.empty?
       .course_tags
         span.glyphicon.glyphicon-tag

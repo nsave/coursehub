@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :find_course, only: [:edit, :update, :destroy, :enroll]
+  before_action :find_course, only: [:edit, :update, :destroy, :enroll, :like, :unlike]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
@@ -66,13 +66,13 @@ class CoursesController < ApplicationController
   end
 
   def like
-    current_user.like(@course)
-    redirect_to course_path(@course)
+    @course.like(current_user.id)
+    render json: {result: 'ok', likes: @course.likes.size}
   end
 
   def unlike
-    current_user.unlike(@course)
-    redirect_to course_path(@course)
+    @course.unlike(current_user.id)
+    render json: {result: 'ok', likes: @course.likes.size}
   end
 
   def filter
@@ -89,7 +89,7 @@ class CoursesController < ApplicationController
   end
 
   def course_tags
-    params[:course][:tags_names].strip.split(/\s+/)
+    params[:course][:tags_names].strip.split(',')
   end
 
   def ensure_user_access

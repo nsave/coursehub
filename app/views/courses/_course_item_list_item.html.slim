@@ -4,14 +4,15 @@
     when 'book' then 'glyphicon-book' \
     when 'podcast' then 'glyphicon-headphones' \
     when 'screencast' then 'glyphicon-facetime-video' \
-    when 'website' then 'glyphicon-globe' \
+    when 'course' then 'glyphicon-globe' \
+    when 'other' then 'glyphicon-asterisk' \
 end
 
 .course_item_list_item.row
   .course_item_list_item_checkbox.col-lg-1.col-md-1.col-sm-1.col-xs-1
     - if user_signed_in? && current_user.enrolled?(@course)
       - if @progress.try(:items).try(:include?, course_item.id)
-        span.glyphicon.glyphicon-check.mark-as-unlearnt data-course=@course.id data-item=course_item.id
+        a.glyphicon.glyphicon-check.mark-as-unlearnt data-course=@course.id data-item=course_item.id
       - else
         a.glyphicon.glyphicon-unchecked.mark-as-learnt data-course=@course.id data-item=course_item.id
     - else
