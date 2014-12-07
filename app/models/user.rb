@@ -49,4 +49,12 @@ class User
   def enrolled?(course)
     course_progresses.where(course: course).exists?
   end
+
+  def like(course)
+    course.like id
+  end
+
+  def unlike(course)
+    course.unlike id
+  end
 end

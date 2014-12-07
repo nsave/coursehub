@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
     member do
       put 'enroll'
+      put 'like'
+      put 'unlike'
     end
   end
 end

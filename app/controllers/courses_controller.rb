@@ -49,13 +49,24 @@ class CoursesController < ApplicationController
 
   def learning
     @title = 'Your course dashboard'
-    @courses = []
+    @courses = CourseProgress.includes(:course).
+      where(user: current_user).map(&:course)
     render :index
   end
 
   def enroll
     current_user.enroll(@course)
     flash[:notice] = "You've successfully enrolled in this course"
+    redirect_to course_path(@course)
+  end
+
+  def like
+    current_user.like(@course)
+    redirect_to course_path(@course)
+  end
+
+  def unlike
+    current_user.unlike(@course)
     redirect_to course_path(@course)
   end
 
@@ -68,7 +79,7 @@ class CoursesController < ApplicationController
   protected
 
   def course_params
-    params.require(:course).permit(:name, :description, :duration).
+    params.require(:course).permit(:name, :description).
       merge(user: current_user)
   end
 

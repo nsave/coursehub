@@ -5,10 +5,10 @@ class Course
   field :description, type: String
   field :duration, type: Float
   field :parent_id, default: nil
+  field :like, type: Array
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :duration, presence: true, numericality: {greater_than: 0}
 
   belongs_to :user
   has_many :course_items
@@ -36,6 +36,10 @@ class Course
     course_items.each.fork(course_id)
   end
 
+  def duration
+    course_items.pluck(:duration).inject(0, :+)
+  end
+
   def pull_request
     pr = PullRequest.create(course_id: parent_id)
     merged_already = parent.course_items.where(user_id: id).map(&:url)
@@ -57,5 +61,19 @@ class Course
 
   def parent
     Course.find parent_id
+  end
+
+  def like?(user)
+    likes.include? user.id
+  end
+
+  def like(user_id)
+    add_to_set(:likes, user_id)
+    save
+  end
+
+  def unlike(user_id)
+    likes.delete(user_id)
+    save
   end
 end
