@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :find_course, only: [:show, :edit, :update, :destroy]
+  before_action :find_course, only: [:show, :edit, :update, :destroy, :enroll]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
@@ -46,6 +46,12 @@ class CoursesController < ApplicationController
   def learning
     @courses = []
     render :index
+  end
+
+  def enroll
+    current_user.enroll(@course)
+    flash[:notice] = "You've successfully enrolled in this course"
+    redirect_to course_path(@course)
   end
 
   protected

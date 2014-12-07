@@ -8,5 +8,8 @@ Rails.application.routes.draw do
       get 'own'
       get 'learning'
     end
+    member do
+      put 'enroll'
+    end
   end
 end

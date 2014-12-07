@@ -1,4 +1,8 @@
-//= require_tree .
 //= require_self
+//= require sticky-footer-navbar
+//= require_tree .
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 .application {margin-bottom: 79px}
