@@ -46,7 +46,7 @@ class CoursesController < ApplicationController
   end
 
   def ensure_user_access
-    unless @course && @course.user == current_user
+    unless @course && @course.user_id == current_user.id
       flash[:alert] = 'You can not edit this course'
       redirect_to(:back)
     end
