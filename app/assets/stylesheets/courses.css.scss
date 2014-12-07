@@ -39,4 +39,10 @@ $margin-big: 29px;
     position: relative;
     top: -2px;
   }
+
+  .author_options {
+    margin-left: $margin-small;
+    cursor: pointer;
+    float: right;
+  }
 }
