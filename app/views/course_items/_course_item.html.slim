@@ -1,6 +1,7 @@
 .row
   .col-lg-6.col-md-6.col-sm-8.col-xs-8.col-lg-offset-3.col-md-offset-3.col-sm-offset-2.col-xs-offset-2
     = form_for [@item.course, @item], html: {role: 'form'} do |f|
+      = validation_errors @item, 'course item'
       .form-group
         = f.label :name
         = f.text_field :name, class: 'form-control'

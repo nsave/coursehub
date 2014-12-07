@@ -1,0 +1,6 @@
+- if model.errors.any?
+  .well
+    h2 = "#{pluralize(model.errors.count, "error")} prohibited this #{name} from being saved:"
+    ul
+      - model.errors.full_messages.each do |message|
+        li = message

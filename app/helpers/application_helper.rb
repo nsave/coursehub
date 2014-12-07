@@ -8,4 +8,8 @@ module ApplicationHelper
     render partial: 'shared/modal',
            locals: {id: id, title: title, body: body, button: button}
   end
+
+  def validation_errors(model, name)
+    render partial: 'shared/validation_errors', locals: {model: model, name: name}
+  end
 end

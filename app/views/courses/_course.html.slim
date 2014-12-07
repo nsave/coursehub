@@ -1,4 +1,5 @@
 = form_for @course, html: {role: 'form'} do |f|
+  = validation_errors @course, 'course'
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control', placeholder: 'E.g. "Ruby for beginners"'
