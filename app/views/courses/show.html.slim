@@ -3,6 +3,8 @@
 .row
   .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
     h1 = @course.name
+    = twitter_button text: 'Check out this beautiful course!'
+    hr
     - unless @course.tags.empty?
       .course_tags
         span.glyphicon.glyphicon-tag
