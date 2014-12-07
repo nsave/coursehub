@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
+    @title = 'Latest courses on CourseHub'
     @courses = Course.all
   end
 
@@ -39,11 +40,13 @@ class CoursesController < ApplicationController
   end
 
   def own
+    @title = 'My own courses'
     @courses = current_user.courses
     render :index
   end
 
   def learning
+    @title = 'Your course dashboard'
     @courses = []
     render :index
   end
