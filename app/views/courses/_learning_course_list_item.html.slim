@@ -2,6 +2,8 @@
 .col-lg-4.col-md-4.col-sm-4.col-xs-6
   .learning_course_list_item
     h3 = link_to course.name, course_path(course)
+    - if current_user && course.user_id == current_user.id
+      span.label.label-info Your course
     .course_stats.row
       .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
         span.glyphicon.glyphicon-time
