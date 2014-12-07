@@ -21,12 +21,12 @@ class Course
   end
 
   def pull_request
+    pr = PullRequest.create(course_id: parent_id)
     merged_already = parent.course_items.where(user_id: id).map(&:url)
     items = course_items.where(user_id: id)
       .reject { |x| merged_already.include? x[:url] }
       .map(&:fork, parent_id)
-    parent.suggested_items += items
-    parent.update
+      .map { |x| x.update(pull_request: pr) }
   end
 
   def progress

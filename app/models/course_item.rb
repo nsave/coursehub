@@ -12,6 +12,7 @@ class CourseItem
   validates :type, presence: true
 
   belongs_to :course
+  belongs_to :pull_request
   has_one :item_progress
 
   def learn
