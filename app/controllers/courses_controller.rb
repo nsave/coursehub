@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:course_progresses).find(params[:id])
+    @course = Course.includes(:course_progresses, :course_items).find(params[:id])
     if user_signed_in?
       @progress = CourseProgress.
         where(course_id: @course.id, user_id: current_user.id).first
