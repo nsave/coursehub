@@ -35,16 +35,13 @@ $margin-big: 29px;
   font-size: 110%;
   margin-bottom: $margin-medium;
 
-  .course_item_list_item_checkbox {
+  .course_item_list_item_checkbox a {
     font-size: 24px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
     position: relative;
     top: -2px;
-
-    a {
-      cursor: pointer;
-      color: black;
-      text-decoration: none;
-    }
   }
 
   .author_options {
