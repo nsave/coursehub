@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :find_course, only: [:show, :edit, :update, :destroy, :enroll]
+  before_action :find_course, only: [:edit, :update, :destroy, :enroll]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
@@ -10,6 +10,11 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.includes(:course_progresses).find(params[:id])
+    if user_signed_in?
+      @progress = CourseProgress.
+        where(course_id: @course.id, user_id: current_user.id).first
+    end
   end
 
   def new

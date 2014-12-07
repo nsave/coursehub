@@ -1,9 +1,6 @@
 class ItemProgress
   include Mongoid::Document
 
-  belongs_to :course
-  embedded_in :course_progress
-
   field :learned, type: Boolean, default: false
 
   def learn

@@ -43,11 +43,11 @@ class User
   # field :locked_at,       type: Time
 
   def enroll(course)
-    course_progresses.find_or_create_by(course: course)
+    course_progresses.find_or_create_by(course_id: course.id)
   end
 
   def enrolled?(course)
-    course_progresses.where(course: course).exists?
+    course_progresses.where(course_id: course.id).exists?
   end
 
   def like(course)
