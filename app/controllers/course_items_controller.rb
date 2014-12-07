@@ -1,6 +1,6 @@
 class CourseItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_course_item, only: [:edit, :update, :destroy]
+  before_action :find_course_item, only: [:edit, :update, :destroy, :learn, :unlearn]
   before_action :ensure_user_access, except: [:learn, :unlearn]
 
   def new
@@ -33,12 +33,13 @@ class CourseItemsController < ApplicationController
   end
 
   def learn
-
+    @item.course.progress_for_user(current_user).learn(@item)
+    head 200
   end
 
   def unlearn
-    find_course_item.unlearn
-    render json: 'ok'
+    @item.course.progress_for_user(current_user).unlearn(@item)
+    head 200
   end
 
   protected

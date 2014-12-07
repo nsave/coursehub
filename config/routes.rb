@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root 'courses#index'
   resources :courses do
-    resources :course_items, path: 'items', except: [:index, :show]
+    resources :course_items, path: 'items', except: [:index, :show] do
+      member do
+        put 'learn'
+        put 'unlearn'
+      end
+    end
     collection do
       get 'own'
       get 'learning'

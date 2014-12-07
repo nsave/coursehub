@@ -16,6 +16,8 @@ class CourseItem
   belongs_to :course
   belongs_to :pull_request
 
+  default_scope ->{ asc(:id) }
+
   def fork(course_id)
     ci = CourseItem.create(name: name, description: description, url: url,
                            type: type, course_id: course_id)

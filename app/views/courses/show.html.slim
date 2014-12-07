@@ -3,6 +3,8 @@
 .row
   .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
     h1 = @course.name
+    = twitter_button text: 'Check out this beautiful course!'
+    hr
     - unless @course.tags.empty?
       .course_tags
         span.glyphicon.glyphicon-tag
@@ -45,4 +47,7 @@
             .progress-bar role='progressbar' style="width: #{course_progress}%"
         - else
           .panel
-            = link_to 'Enroll in this course', enroll_course_path(@course), method: 'put', class: 'btn btn-primary btn-lg'
+            = enroll_button
+
+= modal_window('enroll-first', 'Information', \
+    'To save your progress you must enroll in this course first', enroll_button)
