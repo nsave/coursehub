@@ -9,7 +9,6 @@ class Course
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :duration, presence: true, numericality: {greater_than: 0}
 
   belongs_to :user
   has_many :course_items
@@ -35,6 +34,10 @@ class Course
     Course.create(user_id: user_id, duration: duration, parent_id: id,
                   description: description)
     course_items.each.fork(course_id)
+  end
+
+  def duration
+    course_items.pluck(:duration).inject(0, :+)
   end
 
   def pull_request

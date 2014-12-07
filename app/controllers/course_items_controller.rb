@@ -58,6 +58,6 @@ class CourseItemsController < ApplicationController
 
   def course_item_params
     params.permit(:course_id).
-      merge(params.require(:course_item).permit(:name, :description, :url, :type))
+      merge(params.require(:course_item).permit(:name, :description, :url, :type, :duration))
   end
 end
