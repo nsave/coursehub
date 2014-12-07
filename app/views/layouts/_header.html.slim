@@ -28,6 +28,7 @@ nav.navbar.navbar-inverse role='navigation'
             span &nbsp;
             = link_to('logout', destroy_user_session_path, method: 'delete', class: 'btn btn-danger btn-xs')
       - else
+        = link_to('Sign up', new_user_registration_path, class: 'navbar-right btn btn-warning')
         = form_for(:user, as: :user, :url => session_path(:user), html: { class: 'navbar-form navbar-right'}, role: 'form') do |f|
           .form-group
             input.form-control type='text' placeholder='Email' name='user[email]'
