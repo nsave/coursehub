@@ -76,4 +76,8 @@ class Course
     likes.delete(user_id)
     save
   end
+
+  def progress_for_user(user)
+    course_progresses.find_or_create_by(user_id: user.id)
+  end
 end

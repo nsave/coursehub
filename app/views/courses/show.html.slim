@@ -45,4 +45,7 @@
             .progress-bar role='progressbar' style="width: #{course_progress}%"
         - else
           .panel
-            = link_to 'Enroll in this course', enroll_course_path(@course), method: 'put', class: 'btn btn-primary btn-lg'
+            = enroll_button
+
+= modal_window('enroll-first', 'Information', \
+    'To save your progress you must enroll in this course first', enroll_button)
