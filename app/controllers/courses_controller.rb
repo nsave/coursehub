@@ -59,6 +59,16 @@ class CoursesController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  def like
+    current_user.like(@course)
+    redirect_to course_path(@course)
+  end
+
+  def unlike
+    current_user.unlike(@course)
+    redirect_to course_path(@course)
+  end
+
   protected
 
   def course_params

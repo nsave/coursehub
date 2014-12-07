@@ -51,4 +51,12 @@ class User
   def enrolled?(course)
     course_progress_ids.include?(course._id)
   end
+
+  def like(course)
+    course.like id
+  end
+
+  def unlike(course)
+    course.unlike id
+  end
 end
