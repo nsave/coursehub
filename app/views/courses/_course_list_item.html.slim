@@ -10,7 +10,6 @@
         span = " 4223"
     .course_tags
       span.glyphicon.glyphicon-tag
-      a.label.label-success href='#' Ruby
-      a.label.label-success href='#' Beginners
-      a.label.label-success href='#' Ruby
+      - course.tags.each do |tag|
+        a.label.label-success href='#' = tag.name
     .desc = course.description

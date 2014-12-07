@@ -5,9 +5,8 @@
     h1 = @course.name
     .course_tags
       span.glyphicon.glyphicon-tag
-      a.label.label-success href='#' Ruby
-      a.label.label-success href='#' Beginners
-      a.label.label-success href='#' Ruby
+      - @course.tags.each do |tag|
+        a.label.label-success href='#' = tag.name
     h2
       small = @course.description
     hr

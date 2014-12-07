@@ -4,9 +4,8 @@
     / span.glyphicon.glyphicon-check
   .col-lg-11.col-md-11.col-sm-11.col-xs-11
     .course_item_list_item.row
-      .col-lg-8.col-md-8.col-sm-8.col-xs-8
-        div = course_item.name
-      .col-lg-4.col-md-4.col-sm-4.col-xs-4
-        span.glyphicon.glyphicon-book
-        | &nbsp;
-        = link_to course_item.url, course_item.url
+      .col-lg-9.col-md-9.col-sm-9.col-xs-9
+        = course_item.name
+      .col-lg-3.col-md-3.col-sm-3.col-xs-3
+        a.label.label-default href=course_item.url
+          span.glyphicon.glyphicon-book = " #{course_item.type}"
