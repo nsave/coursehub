@@ -6,7 +6,9 @@
     .course_stats.row
       .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
         span.glyphicon.glyphicon-time
-        span = " #{course.duration.to_i} hours"
+        span
+          =<> number_to_human(course.duration)
+          | hours
       .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
         span.glyphicon.glyphicon-thumbs-up
         | &nbsp;
