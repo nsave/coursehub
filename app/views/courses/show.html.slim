@@ -22,7 +22,8 @@ h2 This course consists of these items:
           td = item.description
           td = link_to 'link', item.url
           td = item.type
-          td = link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
-          td = link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
+          - if(current_user && @course.user_id == current_user.id)
+            td = link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
+            td = link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
 
 = link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-success'

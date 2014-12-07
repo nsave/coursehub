@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+
   before_action :find_course, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
     @courses = Course.all
@@ -39,7 +41,15 @@ class CoursesController < ApplicationController
   protected
 
   def course_params
-    params.require(:course).permit(:name, :description, :duration)
+    params.require(:course).permit(:name, :description, :duration).
+      merge(user: current_user)
+  end
+
+  def ensure_user_access
+    unless @course && @course.user_id == current_user.id
+      flash[:alert] = 'You can not edit this course'
+      redirect_to(:back)
+    end
   end
 
   def find_course

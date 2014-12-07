@@ -1,6 +1,7 @@
 class CourseItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_course_item, only: [:edit, :update, :destroy]
+  before_action :ensure_user_access, except: [:learn, :unlearn]
 
   def new
     @item = CourseItem.new(course_id: params[:course_id])
@@ -45,6 +46,14 @@ class CourseItemsController < ApplicationController
 
   def find_course_item
     @item = CourseItem.includes(:course).find(params[:id])
+  end
+
+  def ensure_user_access
+    course = @item ? @item.course : Course.find(params[:course_id])
+    unless course && course.user_id == current_user.id
+      flash[:alert] = 'Fork this course to edit items'
+      redirect_to(:back)
+    end
   end
 
   def course_item_params
