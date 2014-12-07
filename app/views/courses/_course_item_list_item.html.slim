@@ -1,3 +1,12 @@
+/ %w(article book podcast screencast website)
+- icon_class = case course_item.type \
+    when 'article' then 'glyphicon-list-alt' \
+    when 'book' then 'glyphicon-book' \
+    when 'podcast' then 'glyphicon-headphones' \
+    when 'screencast' then 'glyphicon-facetime-video' \
+    when 'website' then 'glyphicon-globe' \
+end
+
 .course_item_list_item.row
   .course_item_list_item_checkbox.col-lg-1.col-md-1.col-sm-1.col-xs-1
     - if user_signed_in? && current_user.enrolled?(@course)
@@ -16,7 +25,7 @@
         span = " #{course_item.duration.to_i} hours"
       .col-lg-3.col-md-3.col-sm-4.col-xs-4
         a.label.label-default href=course_item.url
-          span.glyphicon.glyphicon-book
+          span class="glyphicon #{icon_class}"
           = " #{course_item.type}"
 
         - if(current_user && @course.user_id == current_user.id)
