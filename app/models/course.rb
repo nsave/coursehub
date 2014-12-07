@@ -72,18 +72,16 @@ class Course
     Course.find parent_id
   end
 
-  def like?(user)
-    likes.include? user.id
+  def like?(user_id)
+    likes.include? user_id
   end
 
   def like(user_id)
     add_to_set likes: user_id
-    save
   end
 
   def unlike(user_id)
-    likes.delete user_id
-    save
+    pull likes: user_id
   end
 
   def progress_for_user(user)

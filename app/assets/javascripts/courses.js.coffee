@@ -37,7 +37,7 @@ $ ->
       $percents.css('width', "#{Math.min(newValue / total * 100, 100)}%")
 
   likeOrUnlikeCourse = (e) ->
-    $btn = $(e.target)
+    $btn = $(e.target).closest('.like-button')
     $likes = $btn.find('.likes-value')
     is_liked = $btn.hasClass('active')
     url = window.location + (if is_liked then '/unlike' else '/like')
