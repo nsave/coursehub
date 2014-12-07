@@ -13,19 +13,6 @@ class CourseItem
 
   belongs_to :course
   belongs_to :pull_request
-  has_one :item_progress
-
-  def learn
-    item_progress.learn
-  end
-
-  def unlearn
-    item_progress.unlearn
-  end
-
-  def learned?
-    item_progress.learned
-  end
 
   def fork(course_id)
     ci = CourseItem.create(name: name, description: description, url: url,

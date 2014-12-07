@@ -12,7 +12,23 @@ class Course
 
   belongs_to :user
   has_many :course_items
-  has_many :item_progresses
+  has_many :course_progresses
+  has_and_belongs_to_many :raw_tags, class_name: 'Tag'
+
+  def tags
+    raw_tags
+  end
+
+  def tags_names
+    raw_tags.pluck(:name).join(' ')
+  end
+
+  def tags=(tags_names = [])
+    tags_names.each do |tag_name|
+      raw_tags << Tag.find_or_create_by(name: tag_name)
+    end
+    self.save
+  end
 
   def fork(user_id)
     Course.create(user_id: user_id, duration: duration, parent_id: id,

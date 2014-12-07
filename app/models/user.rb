@@ -24,6 +24,7 @@ class User
   field :last_sign_in_ip,    type: String
 
   has_many :courses
+  has_many :course_progresses
 
   def self.serialize_from_session(key, salt)
     record = to_adapter.get(key[0]["$oid"])
@@ -40,4 +41,12 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  def enroll(course)
+    course_progresses.find_or_create_by(course: course)
+  end
+
+  def enrolled?(course)
+    course_progresses.where(course: course).exists?
+  end
 end

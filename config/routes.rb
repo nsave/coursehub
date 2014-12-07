@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     collection do
       get 'own'
       get 'learning'
+      get 'filter/:tag' , to: 'courses#filter', as: 'filter'
+    end
+    member do
+      put 'enroll'
     end
   end
 end

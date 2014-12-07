@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :find_course, only: [:show, :edit, :update, :destroy]
+  before_action :find_course, only: [:show, :edit, :update, :destroy, :enroll]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
+      @course.tags = course_tags
       flash[:notice] = 'New course was successfully created'
       redirect_to courses_path
     else
@@ -31,6 +32,7 @@ class CoursesController < ApplicationController
 
   def update
     @course.update(course_params)
+    @course.tags = course_tags
     redirect_to course_path(params[:id])
   end
 
@@ -51,11 +53,27 @@ class CoursesController < ApplicationController
     render :index
   end
 
+  def enroll
+    current_user.enroll(@course)
+    flash[:notice] = "You've successfully enrolled in this course"
+    redirect_to course_path(@course)
+  end
+
+  def filter
+    tag = Tag.where(name: params[:tag]).first
+    @courses = tag && tag.courses || []
+    render :index
+  end
+
   protected
 
   def course_params
     params.require(:course).permit(:name, :description, :duration).
       merge(user: current_user)
+  end
+
+  def course_tags
+    params[:course][:tags_names].strip.split(/\s+/)
   end
 
   def ensure_user_access

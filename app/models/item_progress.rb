@@ -2,7 +2,7 @@ class ItemProgress
   include Mongoid::Document
 
   belongs_to :course
-  belongs_to :course_item
+  embedded_in :course_progress
 
   field :learned, type: Boolean, default: false
 

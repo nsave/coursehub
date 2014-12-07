@@ -33,8 +33,7 @@ class CourseItemsController < ApplicationController
   end
 
   def learn
-    find_course_item.learn
-    render json: 'ok'
+
   end
 
   def unlearn
