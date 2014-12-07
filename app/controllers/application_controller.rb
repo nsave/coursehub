@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def tags
-    @tags = Tag.includes(:courses).all.sort_by { |t| t.courses.size }
+    @tags = Tag.includes(:courses).all.sort_by { |t| - t.courses.size }
   end
 end
