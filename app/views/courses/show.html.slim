@@ -3,10 +3,11 @@
 .row
   .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
     h1 = @course.name
-    .course_tags
-      span.glyphicon.glyphicon-tag
-      - @course.tags.each do |tag|
-        a.label.label-success href='#' = tag.name
+    - unless @course.tags.empty?
+      .course_tags
+        span.glyphicon.glyphicon-tag
+        - @course.tags.each do |tag|
+          a.label.label-success href="#{filter_courses_path(tag.name)}" = tag.name
     h2
       small = @course.description
     hr
@@ -15,11 +16,18 @@
     - else
       - for course_item in @course.course_items
         = render 'course_item_list_item', {course_item: course_item}
-        /- if(current_user && @course.user_id == current_user.id)
-          div =  link_to 'Edit', edit_course_course_item_path(@course, item), class: 'btn btn-warning'
-          div =  link_to 'Delete', course_course_item_path(@course, item), method: 'delete', class: 'btn btn-danger'
 
-    = link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-warning'
+    - if current_user && @course.user_id == current_user.id
+      hr
+      h4 Author's actions
+      .row
+        .col-lg-3.col-md-3.col-sm-3.col-xs-3
+          =  link_to 'Create new item', new_course_course_item_path(@course), class: 'btn btn-success'
+        .col-lg-3.col-md-3.col-sm-3.col-xs-3
+          span =  link_to 'Edit course info', edit_course_path(@course), class: 'btn btn-warning'
+        .col-lg-3.col-md-3.col-sm-3.col-xs-3.col-lg-offset-3.col-md-offset-3.col-sm-offset-3.col-xs-offset-3
+          span =  link_to 'DELETE COURSE', course_path(@course), method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure? This action is UNVERERTABLE' }
+
 
   .user_progress.col-lg-3.col-md-3.col-sm-3.col-xs-3
     .course_stats.row
