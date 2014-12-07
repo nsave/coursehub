@@ -41,9 +41,13 @@ class CoursesController < ApplicationController
   end
 
   def update
-    @course.update(course_params)
-    @course.tags = course_tags
-    redirect_to course_path(params[:id])
+    if @course.update(course_params)
+      @course.tags = course_tags
+      flash[:notice] = 'Course was successfully updated'
+      redirect_to course_path(params[:id])
+    else
+      render :edit
+    end
   end
 
   def destroy

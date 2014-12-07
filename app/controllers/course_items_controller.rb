@@ -21,9 +21,12 @@ class CourseItemsController < ApplicationController
   end
 
   def update
-    @item.update(course_item_params)
-    flash[:notice] = 'Item was successfully updated'
-    redirect_to course_path(@item.course)
+    if @item.update(course_item_params)
+      flash[:notice] = 'Course item was successfully updated'
+      redirect_to course_path(@item.course)
+    else
+      render :edit
+    end
   end
 
   def destroy
