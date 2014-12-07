@@ -59,6 +59,12 @@ class CoursesController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  def filter
+    tag = Tag.where(name: params[:tag]).first
+    @courses = tag && tag.courses || []
+    render :index
+  end
+
   protected
 
   def course_params

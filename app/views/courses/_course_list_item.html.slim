@@ -8,8 +8,9 @@
       .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
         span.glyphicon.glyphicon-thumbs-up
         span = " 4223"
-    .course_tags
-      span.glyphicon.glyphicon-tag
-      - course.tags.each do |tag|
-        a.label.label-success href='#' = tag.name
+    - unless course.tags.empty?
+      .course_tags
+        span.glyphicon.glyphicon-tag
+        - course.tags.each do |tag|
+          a.label.label-success href='#{filter_courses_path(tag.name)}' = tag.name
     .desc = course.description

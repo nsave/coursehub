@@ -3,10 +3,11 @@
 .row
   .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
     h1 = @course.name
-    .course_tags
-      span.glyphicon.glyphicon-tag
-      - @course.tags.each do |tag|
-        a.label.label-success href='#' = tag.name
+    - unless @course.tags.empty?
+      .course_tags
+        span.glyphicon.glyphicon-tag
+        - @course.tags.each do |tag|
+          a.label.label-success href="#{filter_courses_path(tag.name)}" = tag.name
     h2
       small = @course.description
     hr
