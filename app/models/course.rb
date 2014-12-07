@@ -12,7 +12,7 @@ class Course
 
   belongs_to :user
   has_many :course_items
-  hash_many :item_progresses
+  has_many :item_progresses
 
   def fork(user_id)
     Course.create(user_id: user_id, duration: duration, parent_id: id,
