@@ -79,7 +79,7 @@ class CoursesController < ApplicationController
   protected
 
   def course_params
-    params.require(:course).permit(:name, :description, :duration).
+    params.require(:course).permit(:name, :description).
       merge(user: current_user)
   end
 
