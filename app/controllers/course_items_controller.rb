@@ -31,6 +31,16 @@ class CourseItemsController < ApplicationController
     redirect_to course_path(params[:course_id])
   end
 
+  def learn
+    find_course_item.learn
+    render json: 'ok'
+  end
+
+  def unlearn
+    find_course_item.unlearn
+    render json: 'ok'
+  end
+
   protected
 
   def find_course_item

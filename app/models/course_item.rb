@@ -12,4 +12,17 @@ class CourseItem
   validates :type, presence: true
 
   belongs_to :course
+  has_one :item_progress
+
+  def learn
+    item_progress.learn
+  end
+
+  def unlearn
+    item_progress.unlearn
+  end
+
+  def learned?
+    item_progress.learned
+  end
 end
