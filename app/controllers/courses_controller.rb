@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :popular, :latest, :filter]
 
-  before_action :find_course, only: [:edit, :update, :destroy, :enroll, :like, :unlike]
+  before_action :find_course, only: [:edit, :update, :destroy, :enroll, :like, :unlike, :fork]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
   def index
@@ -30,6 +30,11 @@ class CoursesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def fork
+    course = @course.fork(current_user.id)
+    redirect_to course_path(course)
   end
 
   def edit

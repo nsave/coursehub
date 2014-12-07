@@ -4,6 +4,9 @@
     h1 = @course.name
     = twitter_button text: 'Check out this beautiful course!'
     hr
+    - if current_user && @course.user_id != current_user.id
+      = link_to 'Fork course', fork_course_path(@course), class: 'btn btn-info'
+      hr
     - unless @course.tags.empty?
       .course_tags
         span.glyphicon.glyphicon-tag
@@ -27,7 +30,7 @@
         .col-lg-3.col-md-3.col-sm-3.col-xs-3
           span =  link_to 'Edit course info', edit_course_path(@course), class: 'btn btn-warning'
         .col-lg-3.col-md-3.col-sm-3.col-xs-3.col-lg-offset-3.col-md-offset-3.col-sm-offset-3.col-xs-offset-3
-          span =  link_to 'DELETE COURSE', course_path(@course), method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure? This action is UNVERERTABLE' }
+          span = link_to 'DELETE COURSE', course_path(@course), method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure? This action is UNREVERTABLE' }
 
 
   .user_progress.col-lg-3.col-md-3.col-sm-3.col-xs-3

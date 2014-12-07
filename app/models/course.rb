@@ -32,9 +32,17 @@ class Course
   end
 
   def fork(user_id)
-    Course.create(user_id: user_id, duration: duration, parent_id: id,
+    course = Course.create(user_id: user_id, name: name, duration: duration, parent_id: id,
                   description: description)
-    course_items.each.fork(course_id)
+
+    course.tags = tags.pluck(:name)
+    self.tags.each do |tag|
+      tag.courses << course
+    end
+    course_items.each do |single|
+      single.fork(course.id)      
+    end
+    course
   end
 
   def duration

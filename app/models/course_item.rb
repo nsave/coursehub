@@ -17,10 +17,6 @@ class CourseItem
   default_scope ->{ asc(:id) }
 
   def fork(course_id)
-    ci = CourseItem.create(name: name, url: url,
-                           type: type, course_id: course_id)
-    ItemProgress.create(learned: false, course_item_id: ci.id,
-                        course_id: course_id)
-    ci
+    CourseItem.create(name: name, url: url, type: type, course_id: course_id, duration: duration)
   end
 end

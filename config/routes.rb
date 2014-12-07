@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       put 'enroll'
       put 'like'
       put 'unlike'
+      get 'fork'
     end
   end
 end
