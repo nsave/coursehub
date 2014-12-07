@@ -68,12 +68,12 @@ class Course
   end
 
   def like(user_id)
-    add_to_set(:likes, user_id)
+    add_to_set likes: user_id
     save
   end
 
   def unlike(user_id)
-    likes.delete(user_id)
+    likes.delete user_id
     save
   end
 end
