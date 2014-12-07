@@ -27,6 +27,10 @@ $margin-big: 29px;
   border-right: $separator-border;
 }
 
+.user_progress_stats {
+  margin-top: $margin-medium;
+}
+
 .course_item_list_item {
   font-size: 110%;
   margin-bottom: $margin-medium;

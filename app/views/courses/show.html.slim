@@ -1,4 +1,5 @@
 - course_progress = (1/3.0)*100 # must be number of passed items divided to total items number
+- is_liked = (@course.likes.nil? or current_user.nil?) ? false : (@course.likes.include? current_user.id)
 
 .row
   .course_content.col-lg-9.col-md-9.col-sm-9.col-xs-9
@@ -37,8 +38,16 @@
         span.glyphicon.glyphicon-time
         span = " #{@course.duration.to_i} hours"
       .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
-        span.glyphicon.glyphicon-thumbs-up
-        span = " 4223"
+        - if current_user
+          button class="like-button btn btn-default btn-xs #{is_liked ? 'active' : ''}"
+            span.glyphicon.glyphicon-thumbs-up
+            span &nbsp;
+            span.likes-value = @course.likes.nil? ? 0 : @course.likes.size
+        - else
+          span
+            span.glyphicon.glyphicon-thumbs-up
+            span &nbsp;
+            span = @course.likes.nil? ? 0 : @course.likes.size
     .user_progress_stats.row
       .col-lg-12.col-md-12.col-sm-12.col-xs-12
         - if user_signed_in? && current_user.enrolled?(@course)
@@ -46,7 +55,6 @@
           .progress
             .progress-bar role='progressbar' style="width: #{course_progress}%"
         - else
-          .panel
             = enroll_button
 
 = modal_window('enroll-first', 'Information', \
