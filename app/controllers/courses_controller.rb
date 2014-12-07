@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
+      @course.tags = course_tags
       flash[:notice] = 'New course was successfully created'
       redirect_to courses_path
     else
@@ -31,6 +32,7 @@ class CoursesController < ApplicationController
 
   def update
     @course.update(course_params)
+    @course.tags = course_tags
     redirect_to course_path(params[:id])
   end
 
@@ -56,6 +58,10 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:name, :description, :duration).
       merge(user: current_user)
+  end
+
+  def course_tags
+    params[:course][:tags_names].strip.split(/\s+/)
   end
 
   def ensure_user_access
