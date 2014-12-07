@@ -87,7 +87,19 @@ class CoursesController < ApplicationController
 
   def filter
     tag = Tag.where(name: params[:tag]).first
+    @title = "Courses with tag #{tag.name}"
     @courses = tag && tag.courses || []
+    render :index
+  end
+
+  def search
+    @title = "Search for: #{params[:search]}"
+    keywords = params[:search].strip.downcase.split(/\s+/)
+    @courses = Course.all.select do |course| 
+      keywords.find do 
+        |keyword| course.name.downcase.include?(keyword) || course.description.include?(keyword)
+      end
+    end
     render :index
   end
 

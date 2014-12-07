@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'courses#index'
   get 'tags', to: 'application#tags'
+  post 'search', to: 'courses#search'
   resources :courses do
     resources :course_items, path: 'items', except: [:index, :show] do
       member do
