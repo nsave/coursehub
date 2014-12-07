@@ -47,24 +47,26 @@ class CoursesController < ApplicationController
   end
 
   def own
-    @title = 'My own courses'
+    @title = 'Your own courses'
     @courses = current_user.courses
     render :index
   end
 
   def learning
-    @title = 'Your course dashboard'
+    @title = 'Courses you have enrolled'
     @courses = CourseProgress.includes(:course).
       where(user: current_user).map(&:course)
     render :index
   end
 
   def popular
+    @title = 'Most popular courses'
     @courses = (Course.all.sort_by { |x| x.likes.size }).reverse
     render :index
   end
 
   def latest
+    @title = 'Latest courses'
     @courses = Course.order_by(:created_at => 'desc')
     render :index
   end
