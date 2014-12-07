@@ -21,7 +21,7 @@ nav.navbar.navbar-inverse role='navigation'
       - if user_signed_in?
         form.navbar-form.navbar-left
           .form-group
-            = link_to 'Create course', new_course_path, class: 'btn btn-info'
+            = link_to 'Create course', new_course_path, class: 'btn btn-success'
         div.navbar-right
           .navbar-text
             = current_user.email
