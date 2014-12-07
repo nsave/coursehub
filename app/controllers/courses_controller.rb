@@ -89,7 +89,7 @@ class CoursesController < ApplicationController
   end
 
   def course_tags
-    params[:course][:tags_names].strip.split(/\s+/)
+    params[:course][:tags_names].strip.split(',')
   end
 
   def ensure_user_access
