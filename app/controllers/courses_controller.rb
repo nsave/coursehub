@@ -53,10 +53,7 @@ class CoursesController < ApplicationController
   end
 
   def learning
-    @title = 'Your course dashboard'
-    @courses = CourseProgress.includes(:course).
-      where(user: current_user).map(&:course)
-    render :index
+    @progresses = CourseProgress.includes(:course).where(user: current_user)
   end
 
   def popular

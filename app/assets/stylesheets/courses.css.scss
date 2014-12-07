@@ -13,14 +13,22 @@ $margin-big: 29px;
   border-bottom: $separator-border;
   margin-bottom: $margin-big;
 
-  .course_list_item {
+  .course_list_item,
+  .learning_course_list_item {
     border-top: $separator-border;
     margin-bottom: $margin-big;
     min-height: 325px;
 
     div {margin-top: $margin-small;}
     .desc {margin-top: $margin-medium}
+  }
 
+  .learning_course_list_item {
+    min-height: 350px;
+
+    .progress-bar {
+      margin-top: 0px;
+    }
   }
 }
 

@@ -1,0 +1,33 @@
+- course = progress.course
+.col-lg-4.col-md-4.col-sm-4.col-xs-6
+  .learning_course_list_item
+    h3 = link_to course.name, course_path(course)
+    .course_stats.row
+      .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-time
+        span
+          =<> number_to_human(course.duration)
+          | hours
+      .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
+        span.glyphicon.glyphicon-thumbs-up
+        | &nbsp;
+        span = course.likes.try(:size) || 0
+    - unless course.tags.empty?
+      .course_tags
+        span.glyphicon.glyphicon-tag
+        - course.tags.each do |tag|
+          a.label.label-success href='#{filter_courses_path(tag.name)}' = tag.name
+    .desc
+      - if course.description.length > 200
+        = course.description.truncate(200)
+        =< link_to 'read more', course_path(course)
+      - else
+        = course.description
+    .learning-progress
+      - total = course.course_items.try(:size) || 0
+      - learnt = progress.try(:items).try(:size) || 0
+      h4 Your progress: #{learnt}/#{total}
+      - unless total.zero?
+        .progress
+          - percents = [learnt.to_f / total * 100, 100].min
+          .progress-bar role='progressbar' style="width: #{percents}%"

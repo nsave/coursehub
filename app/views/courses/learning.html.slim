@@ -1,0 +1,9 @@
+.row
+  h1 Your course dashboard
+
+.row.course_list
+  - if @progresses.empty?
+    .alert.alert-warning Sorry. There are no available courses.
+  - else
+    - for progress in @progresses
+      = render 'courses/learning_course_list_item', {progress: progress}
