@@ -14,4 +14,9 @@
         span.glyphicon.glyphicon-tag
         - course.tags.each do |tag|
           a.label.label-success href='#{filter_courses_path(tag.name)}' = tag.name
-    .desc = course.description
+    .desc
+      - if course.description.length > 200
+        = course.description.truncate(200)
+        =< link_to 'read more', course_path(course)
+      - else
+        = course.description
