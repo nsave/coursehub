@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   root 'courses#index'
   resources :courses do
     resources :course_items, path: 'items', except: [:index, :show]
+    collection do
+      get 'own'
+      get 'learning'
+    end
   end
 end

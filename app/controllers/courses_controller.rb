@@ -38,6 +38,16 @@ class CoursesController < ApplicationController
     redirect_to courses_path
   end
 
+  def own
+    @courses = current_user.courses
+    render :index
+  end
+
+  def learning
+    @courses = []
+    render :index
+  end
+
   protected
 
   def course_params
