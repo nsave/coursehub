@@ -4,15 +4,19 @@
     - if current_user && course.user_id == current_user.id
       span.label.label-primary Your course
     .course_stats.row
-      .duration.col-lg-6.col-md-6.col-sm-12.col-xs-12
+      .duration.col-lg-4.col-md-4.col-sm-4.col-xs-4
         span.glyphicon.glyphicon-time
         span
           =<> number_to_human(course.duration)
           | hours
-      .likes.col-lg-6.col-md-6.col-sm-12.col-xs-12
+      .likes.col-lg-3.col-md-3.col-sm-3.col-xs-3
         span.glyphicon.glyphicon-thumbs-up
         | &nbsp;
         span = course.likes.nil? ? 0 : course.likes.size
+      .author.col-lg-5.col-md-5.col-sm-5.col-xs-5
+        span.glyphicon.glyphicon-user
+        | &nbsp;
+        span = course.user.email.split('@').first
     - unless course.tags.empty?
       .course_tags
         span.glyphicon.glyphicon-tag
