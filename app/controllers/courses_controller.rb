@@ -1,6 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :popular, :latest, :filter]
-
+  before_action :authenticate_user!, except: [:index, :show, :popular, :latest, :filter, :search]
   before_action :find_course, only: [:edit, :update, :destroy, :enroll, :like, :unlike, :fork]
   before_action :ensure_user_access, only: [:edit, :update, :destroy]
 
