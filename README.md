@@ -18,12 +18,16 @@ Googling is nice but... Think about how many people will walk the same road? Wha
 
 ## Screenshots
 
+### Look through courses created by community!
 ![Courses page](public/1.png?raw=true)
 
+### Take a course step by step with provided materials!
 ![Course page](public/2.png?raw=true)
 
+### Get all courses you like!
 ![Courses you are learning](public/3.png?raw=true)
 
+### Create your own course or fork existing ones
 ![Create your own course](public/4.png?raw=true)
 
 ![Add new item to your course](public/5.png?raw=true)
