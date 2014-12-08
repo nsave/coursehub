@@ -18,8 +18,12 @@ Googling is nice but... Think about how many people will walk the same road? Wha
 
 ## Screenshots
 
+![Courses page](public/1.png?raw=true)
 
+![Course page](public/2.png?raw=true)
 
-## APIs used
+![Courses you are learning](public/3.png?raw=true)
 
-Oops..
+![Create your own course](public/4.png?raw=true)
+
+![Add new item to your course](public/5.png?raw=true)
