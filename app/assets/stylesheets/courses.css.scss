@@ -59,22 +59,3 @@ $margin-big: 29px;
     float: right;
   }
 }
-
-@media screen and (max-width: 1180px) {
-  #navbar-search {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 880px) {
-  #create-btn {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  #navbar-search,
-  #create-btn {
-    display: block;
-  }
-}

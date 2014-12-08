@@ -41,18 +41,14 @@ nav.navbar.navbar-inverse role='navigation'
             span &nbsp;
             = link_to('logout', destroy_user_session_path, method: 'delete', class: 'btn btn-danger btn-xs')
       - else
-        = form_for(:user, as: :user, :url => session_path(:user), html: { class: 'navbar-form navbar-right'}, role: 'form') do |f|
+        form.navbar-form.navbar-right
           .form-group
-            input.form-control type='text' placeholder='Email' name='user[email]'
-          | &nbsp
-          .form-group
-            input.form-control type='password' placeholder='Password' name='user[password]'
-          | &nbsp
-          button.btn.btn-success type="submit" Sign in
-          | &nbsp;
-          = link_to('Sign up', new_user_registration_path, class: 'navbar-right btn btn-warning')
+            = link_to('Sign In', new_user_session_path, class: 'btn btn-success')
+            | &nbsp;
+            = link_to('Sign Up', new_user_registration_path, class: 'btn btn-warning')
 
-      = form_tag("/search", class: 'navbar-form navbar-right', id: 'navbar-search') do
+      = form_tag("/search", class: 'navbar-form navbar-left', id: 'navbar-search') do
         .form-group
           = text_field_tag('search', nil, class: 'form-control', placeholder: 'Search')
+        | &nbsp;
         = submit_tag("Search", class: 'btn btn-primary')
